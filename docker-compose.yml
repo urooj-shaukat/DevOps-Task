@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: php_db
+    environment:
+      MYSQL_ROOT_PASSWORD: Urooj@20
+      MYSQL_DATABASE: first_db
+      MYSQL_USER: usertest
+      MYSQL_PASSWORD: testpass
+    ports:
+      - "9906:3306"
+  web:
+    image: php:7.2.2-apache
+    container_name:  php_web
+    depends_on:
+      - db
+    volumes:
+      - ./php/:/var/www/html/
+    ports:
+      - "8100:80"
